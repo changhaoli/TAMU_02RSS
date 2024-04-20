@@ -6,7 +6,6 @@ import sys
 import re
 
 ####Summary: This script was used to call mismatches from bam file for DMS-MaPseq. Mismatches happened 3 nt within indels were discarded.
-####         The input file is a sorted.bam file.
 ####         The output is a bed file with reference nucleotide and mismatch number for each mismatched location
 ####Author: Changhao Li
 ####E-mail: chli.bioinfo@gmail.com
@@ -62,7 +61,7 @@ for read in pysam.AlignmentFile(bamfile, 'r'):
                 if(region_range_type[region_i][2] == "M"):
                     crt_pos = base + len(re.sub("\^", "", md_mismatch[n]))
                     ####count this base
-                    tmpkey = "_".join([chrom,str(base)])
+                    tmpkey = "*".join([chrom,str(base)])
                     if base not in indel_reg:
                         try:
                             baseInfo[tmpkey][1] +=1
@@ -116,7 +115,7 @@ for read in pysam.AlignmentFile(bamfile, 'r'):
         
 
 for key in baseInfo:
-    tmpkey = key.split("_")
+    tmpkey = key.split("*")
     chrom = tmpkey[0]
     start = str(int(tmpkey[1]) - 1)
     end   = str(int(tmpkey[1]))
