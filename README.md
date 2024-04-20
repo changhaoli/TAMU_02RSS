@@ -8,3 +8,6 @@ pysam >= 0.15.1
 
 ## Usage
 python CountMismatch2Bed.py input.bam > output.bed
+
+## Output information
+column names: chr start end name mismatch_count
